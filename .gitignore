@@ -1,0 +1,18 @@
+# dependencies
+/node_modules
+
+# next.js build output
+/.next/
+/out/
+next-env.d.ts
+
+# environment files (design §2 rule 10: secrets never committed)
+.env
+.env.local
+
+# sqlite database files (design §7)
+/prisma/dev.db
+/prisma/dev.db-journal
+
+# misc
+*.tsbuildinfo
