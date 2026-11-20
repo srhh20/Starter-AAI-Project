@@ -202,18 +202,18 @@ This builds `01-requirements.md` (U9–U22, AC-15–AC-31). Below,
 
 | Status | # | Task | Priority | Checks (requirements §6) |
 |--------|---|------|----------|--------------------------|
-| Todo | 10 | The leave tables in the database + the five leave types | High | — (enables everything; design §1) |
-| Todo | 11 | Rules library: validation, transitions, supervisors, days | High | — (foundation; design §2–3, §6) |
-| Todo | 12 | Employee: New request + own list | High | AC-15, AC-16, AC-23 |
-| Todo | 13 | Supervisor queue: sign and reject | High | AC-18, AC-19, AC-23 |
-| Todo | 14 | Employee: Send the signed request to HR | High | AC-20, AC-23 |
-| Todo | 15 | HR queue: approve and reject with remark | High | AC-21, AC-23 |
-| Todo | 16 | History views with status and remarks | High | AC-22 |
-| Todo | 17 | Server-side enforcement sweep | High | AC-24 (+ re-runs of AC-16/17/18/20) |
-| Todo | 18 | Admin view-only table | Medium | AC-25 |
-| Todo | 19 | Extra X1 — block duplicate submissions | Low | AC-26 |
-| Todo | 20 | Extra X2 — edit before signing | Low | AC-27 |
-| Todo | 21 | Extra X3 — HR asks for info | Low | AC-28 |
+| Done | 10 | The leave tables in the database + the five leave types | High | — (enables everything; design §1) |
+| Done | 11 | Rules library: validation, transitions, supervisors, days | High | — (foundation; design §2–3, §6) |
+| Done | 12 | Employee: New request + own list | High | AC-15, AC-16, AC-23 |
+| Done | 13 | Supervisor queue: sign and reject | High | AC-18, AC-19, AC-23 |
+| Done | 14 | Employee: Send the signed request to HR | High | AC-20, AC-23 |
+| Done | 15 | HR queue: approve and reject with remark | High | AC-21, AC-23 |
+| Done | 16 | History views with status and remarks | High | AC-22 |
+| Done | 17 | Server-side enforcement sweep | High | AC-24 (+ re-runs of AC-16/17/18/20) |
+| Done | 18 | Admin view-only table | Medium | AC-25 |
+| Done | 19 | Extra X1 — block duplicate submissions | Low | AC-26 |
+| Done | 20 | Extra X2 — edit before signing | Low | AC-27 |
+| Done | 21 | Extra X3 — HR asks for info | Low | AC-28 |
 | Todo | 22 | Extra X4 — submission throttle | Low | AC-29 |
 | Todo | 23 | Extra X5 — audit trail + admin audit view | Low | AC-30 |
 | Todo | 24 | Extra X6 — seed the sample requests | Low | AC-31 |
