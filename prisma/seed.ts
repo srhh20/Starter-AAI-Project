@@ -1,5 +1,9 @@
-// Loads the six demo users from brief section 7.2 / design Reference B.
-// AC-14: safe to run repeatedly — clears Users first, so no duplicates.
+// Loads the six demo users from brief §7.2 / design Reference B and the
+// five leave types from brief §7.2 / design Reference C.
+// AC-14 (users) and Task 10 (types): safe to run repeatedly — clears the
+// tables first, so no duplicates. Wipe order is children before parents so
+// no leave row ever points at a deleted user (leave design §6).
+// AuditLog joins this order in Task 23 (X5), before LeaveRequest.
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
@@ -59,13 +63,40 @@ const USERS = [
   },
 ];
 
+// The five choices for the leave form, verbatim from brief §7.2, with the
+// Notes column as the optional helper description.
+const LEAVE_TYPES = [
+  { name: "Annual leave", description: "Yearly paid leave" },
+  {
+    name: "Maternity leave",
+    description: "For employees who are expecting or have just given birth",
+  },
+  { name: "Unpaid leave", description: "Leave without pay" },
+  {
+    name: "Compassionate leave",
+    description: "For a family emergency or bereavement",
+  },
+  { name: "Other", description: "The employee must write what is for" },
+];
+
 async function main() {
+  // Children before parents (leave design §6): requests point at both
+  // Users and LeaveTypes, so they go first. AuditLog joins this order
+  // with Task 23 (X5).
+  await prisma.leaveRequest.deleteMany();
   await prisma.user.deleteMany();
+  await prisma.leaveType.deleteMany();
+
   const passwordHash = bcrypt.hashSync(DEMO_PASSWORD, 10);
   for (const user of USERS) {
     await prisma.user.create({ data: { ...user, passwordHash } });
   }
-  console.log(`Seeded ${USERS.length} demo users.`);
+  for (const type of LEAVE_TYPES) {
+    await prisma.leaveType.create({ data: type });
+  }
+  console.log(
+    `Seeded ${USERS.length} demo users and ${LEAVE_TYPES.length} leave types.`
+  );
 }
 
 main()

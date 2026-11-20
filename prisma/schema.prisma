@@ -1,6 +1,8 @@
-// One model so far: every person who can log in (design §1).
-// SQLite has no enum support, so role is free text validated in code
-// (src/lib/auth.ts) against Employee | Supervisor | HR | Admin.
+// Models: every person who can log in (design §1), plus the leave tables
+// (leave design §1).
+// SQLite has no enum support, so role, status and similar fixed values are
+// free text validated in code (src/lib/auth.ts, src/lib/leave-rules.ts)
+// against the fixed lists in design Reference A / Reference C.
 
 generator client {
   provider = "prisma-client-js"
@@ -21,4 +23,47 @@ model User {
   division     String
   designation  String
   createdAt    DateTime @default(now())
+
+  // Leave-module relations (leave design §1) — no stored data changes.
+  submittedRequests  LeaveRequest[] @relation("EmployeeRequests")
+  supervisedRequests LeaveRequest[] @relation("SupervisorAssignments")
+  hrDecisions        LeaveRequest[] @relation("HrOfficer")
+}
+
+// The five fixed dropdown options (leave design §1, brief §7.2).
+// Loaded by the seed only; the app never edits it.
+model LeaveType {
+  id          Int            @id @default(autoincrement())
+  name        String         @unique
+  description String?
+  requests    LeaveRequest[]
+}
+
+// One row per request — the brief §7.2 field table (leave design §1).
+// status holds exactly one of the six §5.2 strings; the code rejects
+// anything else (src/lib/leave-rules.ts). Durations are computed, never
+// stored. Timestamps are set by the server as each step happens.
+model LeaveRequest {
+  id               Int       @id @default(autoincrement())
+  employeeId       Int
+  supervisorId     Int
+  leaveTypeId      Int
+  otherLeaveType   String?
+  startDate        DateTime
+  endDate          DateTime
+  status           String    @default("Pending supervisor")
+  supervisorRemark String?
+  hrOfficerId      Int?
+  hrRemark         String?
+  infoNote         String?
+  infoNoteAt       DateTime?
+  submittedAt      DateTime  @default(now())
+  signedAt         DateTime?
+  sentToHrAt       DateTime?
+  decidedAt        DateTime?
+
+  employee    User       @relation("EmployeeRequests", fields: [employeeId], references: [id])
+  supervisor  User       @relation("SupervisorAssignments", fields: [supervisorId], references: [id])
+  hrOfficer   User?      @relation("HrOfficer", fields: [hrOfficerId], references: [id])
+  leaveType   LeaveType  @relation(fields: [leaveTypeId], references: [id])
 }
