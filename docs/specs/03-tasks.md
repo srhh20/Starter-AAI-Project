@@ -16,15 +16,15 @@ with a conventional-commit message, asking permission first (brief 7.3).
 
 | Status | # | Task | Priority | Checks (from requirements §4) |
 |--------|---|------|----------|-------------------------------|
-| To do | 1 | Create the database and the Users table | High | — (enables everything; design §1) |
-| To do | 2 | Seed the six demo users | High | AC-14 |
-| To do | 3 | Signed session cookies | High | AC-11, AC-13 (foundation) |
-| To do | 4 | Server-side checks: validation and lockout | High | AC-04, AC-06 (foundation) |
-| To do | 5 | Sign in: login page and sign-in action | High | AC-02–AC-06, AC-12 |
-| To do | 6 | The four role homes and the gatekeeper | High | AC-01, AC-07–AC-09, AC-11, AC-13 |
-| To do | 7 | Sign out with confirmation | High | AC-10 |
-| To do | 8 | proxy.ts defence in depth | Medium | AC-08 (second layer) |
-| To do | 9 | Full sweep of the acceptance checklist | High | AC-01–AC-14 |
+| Done | 1 | Create the database and the Users table | High | — (enables everything; design §1) |
+| Done | 2 | Seed the six demo users | High | AC-14 |
+| Done | 3 | Signed session cookies | High | AC-11, AC-13 (foundation) |
+| Done | 4 | Server-side checks: validation and lockout | High | AC-04, AC-06 (foundation) |
+| Done | 5 | Sign in: login page and sign-in action | High | AC-02–AC-06, AC-12 |
+| Done | 6 | The four role homes and the gatekeeper | High | AC-01, AC-07–AC-09, AC-11, AC-13 |
+| Done | 7 | Sign out with confirmation | High | AC-10 |
+| Done | 8 | proxy.ts defence in depth | Medium | AC-08 (second layer) |
+| Done | 9 | Full sweep of the acceptance checklist | High | AC-01–AC-14 |
 
 ---
 

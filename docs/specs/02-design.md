@@ -104,12 +104,12 @@ script, which are configuration, not dependencies.
 
 | Route | Who | What it shows | Status |
 |-------|-----|---------------|--------|
-| `/` | Anyone | Server-side redirect only: signed in → own home; anonymous → `/login` | To do |
-| `/login` | Anonymous | Email + password form, "Sign in" button, generic error text, format hint, lockout notice, "You have been signed out" banner after sign-out. Signed-in visitors are redirected to their home | To do |
-| `/employee` | Employee | Login-stage placeholder: header with name + role + Sign out, and a "Your leave requests will appear here" panel | To do |
-| `/supervisor` | Supervisor | Same placeholder shell, worded for the signature queue | To do |
-| `/hr` | HR | Same placeholder shell, worded for the Pending-HR queue | To do |
-| `/admin` | Admin | Same placeholder shell, worded for the all-records view | To do |
+| `/` | Anyone | Server-side redirect only: signed in → own home; anonymous → `/login` | Done |
+| `/login` | Anonymous | Email + password form, "Sign in" button, generic error text, format hint, lockout notice, "You have been signed out" banner after sign-out. Signed-in visitors are redirected to their home. Styled per §8 | Done |
+| `/employee` | Employee | Login-stage placeholder: header with name + role + Sign out, and a "Your leave requests will appear here" panel. Styled per §8 | Done |
+| `/supervisor` | Supervisor | Same placeholder shell, worded for the signature queue. Styled per §8 | Done |
+| `/hr` | HR | Same placeholder shell, worded for the Pending-HR queue. Styled per §8 | Done |
+| `/admin` | Admin | Same placeholder shell, worded for the all-records view. Styled per §8 | Done |
 
 The four home pages share one authenticated layout (header with the signed-in
 name, role and Sign out button) via a route group. Each page checks its own
@@ -173,6 +173,40 @@ role before rendering, so typing another role's URL bounces to your home.
 | `npm run dev` | Start the app at http://localhost:3000 |
 | `npm run lint` | Must pass before any task is called done |
 | `npm run build` / `npm start` | Production build and run |
+
+## 8. Look and feel (visual design)
+
+> Reference: the "Member login" mockup supplied on 2026-11-20 (blurred blue
+> sky). This section is **cosmetic only**: nothing in §2 (rules) or §4
+> (behaviour) changes — same text, fields, messages, confirmations,
+> redirects and cookie behaviour.
+
+- **Background.** Every screen sits on a blurred sky-blue gradient
+  (top `#5b82bd` → `#a9c4e8` → bottom `#dce9f7`, with soft white cloud
+  washes). The reference's stock photo is licensed imagery, so the look is
+  rebuilt with CSS gradients — no image file is added to the repo.
+- **Palette.** Slate blue `#4a6184` (icon boxes, buttons, header bar, card
+  headings; hover `#3e5375`); white fields and cards; gray
+  placeholder/secondary text; white text on blue surfaces.
+- **Login screen.** One centred column (max 384 px) directly on the
+  gradient — no card. A light-weight white title (wide letter spacing,
+  app name rather than the mockup's "MEMBER LOGIN" wording) with a small
+  people icon beneath, a subtitle, then the form. Each field is one row: a
+  square slate-blue icon box (person / lock glyph in white) flush against a
+  white input with gray placeholder; rows stack with ~24 px gaps. The
+  submit button spans the field column: slate-blue, white uppercase
+  wide-tracked text. Error messages render in semibold red (`red-600`,
+  readable where the gradient lightens); the signed-out banner is white
+  text on a translucent white chip. Visible labels become
+  screen-reader-only text in the markup so fields stay accessible and
+  testable. The mockup's "Remember
+  me" and "Forgot password?" are deliberately **not** built (requirements
+  §5) — decision confirmed 2026-11-20.
+- **Role homes.** Same gradient behind everything; a solid slate-blue
+  header bar carries the brand on the left and `Name · Role` plus a
+  ghost-white uppercase Sign out button on the right. Each page's content
+  is one white card with a soft shadow: slate-blue heading, slate-gray
+  body text.
 
 ---
 
