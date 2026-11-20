@@ -1,0 +1,24 @@
+// One model so far: every person who can log in (design §1).
+// SQLite has no enum support, so role is free text validated in code
+// (src/lib/auth.ts) against Employee | Supervisor | HR | Admin.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  name         String
+  icNo         String   @unique
+  email        String   @unique
+  passwordHash String
+  role         String
+  division     String
+  designation  String
+  createdAt    DateTime @default(now())
+}
